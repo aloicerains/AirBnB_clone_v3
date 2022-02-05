@@ -91,4 +91,3 @@ class DBStorage:
             for clas in classes:
                 total += len(list(self.__session.query(classes[clas]).all()))
             return total
-
