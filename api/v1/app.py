@@ -14,7 +14,6 @@ app.register_blueprint(app_views)
 @app.errorhandler(404)
 def page_not_found(error):
     """Returns formate response of 404 error"""
-    print("Error 404", file=sys.stderr)
     return jsonify({"error": "Not found"})
 
 
