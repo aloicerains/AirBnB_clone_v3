@@ -17,6 +17,7 @@ def get_amenities():
     return (jsonify(list_amenities))
 
 
+@app_views.route('/amenities/<string:am_id>/', methods=['GET'])
 @app_views.route('/amenities/<string:am_id>', methods=['GET'])
 def get_amenity(am_id):
     """Retrieves a given amenity"""
@@ -26,6 +27,7 @@ def get_amenity(am_id):
     return (jsonify(valid_id.to_dict()))
 
 
+@app_views.route('/amenities/<string:am_id>/', methods=['DELETE'])
 @app_views.route('/amenities/<string:am_id>', methods=['DELETE'])
 def delete_amenity(am_id):
     """Deletes an amenity for a given Id"""
@@ -53,6 +55,7 @@ def create_amenity():
         abort(400, description="Not a JSON")
 
 
+@app_views.route('/amenities/<string:am_id>/', methods=['PUT'])
 @app_views.route('/amenities/<string:am_id>', methods=['PUT'])
 def update_amenity(am_id):
     """Updates the amenity based on Id"""
