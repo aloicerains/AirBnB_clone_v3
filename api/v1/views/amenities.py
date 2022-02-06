@@ -5,6 +5,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 from models.amenity import Amenity
 
+
 @app_views.route('/amenities/', methods=['GET'])
 @app_views.route('/amenities', methods=['GET'])
 def get_amenities():
@@ -15,6 +16,7 @@ def get_amenities():
         list_amenities.append(amenity.to_dict())
     return (jsonify(list_amenities))
 
+
 @app_views.route('/amenities/<string:am_id>', methods=['GET'])
 def get_amenity(am_id):
     """Retrieves a given amenity"""
@@ -22,6 +24,7 @@ def get_amenity(am_id):
     if valid_id is None:
         abort(404)
     return (jsonify(valid_id.to_dict()))
+
 
 @app_views.route('/amenities/<string:am_id>', methods=['DELETE'])
 def delete_amenity(am_id):
@@ -33,6 +36,8 @@ def delete_amenity(am_id):
     storage.save()
     return {}, 200
 
+
+@app_views.route('/amenities/', methods=['POST'])
 @app_views.route('/amenities', methods=['POST'])
 def create_amenity():
     """Creates an amenity"""
@@ -46,6 +51,7 @@ def create_amenity():
         return (new_amenity.to_dict()), 201
     else:
         abort(400, description="Not a JSON")
+
 
 @app_views.route('/amenities/<string:am_id>', methods=['PUT'])
 def update_amenity(am_id):
