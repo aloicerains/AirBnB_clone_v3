@@ -7,6 +7,7 @@ import json
 from models.city import City
 from models.state import State
 
+
 @app_views.route('/states/<string:state_id>/cities', methods=['GET'])
 def get_cities(state_id):
     """Retrieves Cities of state"""
@@ -22,6 +23,7 @@ def get_cities(state_id):
             list_cities.append(city.to_dict())
         return (jsonify(list_cities))
 
+
 @app_views.route('/cities/<string:city_id>', methods=['GET'])
 def get_city(city_id):
     """Retrieves specific city of given Id"""
@@ -29,6 +31,7 @@ def get_city(city_id):
     if valid_id is None:
         abort(404)
     return (jsonify(valid_id.to_dict()))
+
 
 @app_views.route('/cities/<string:city_id>', methods=['DELETE'])
 def delete_city(city_id):
@@ -39,6 +42,7 @@ def delete_city(city_id):
     storage.delete(valid_id)
     storage.save()
     return {}, 200
+
 
 @app_views.route('/states/<string:state_id>/cities', methods=['POST'])
 def create_city(state_id):
@@ -58,7 +62,8 @@ def create_city(state_id):
             return new_city.to_dict(), 201
     else:
         abort(400, description="Not a JSON")
-    
+
+
 @app_views.route('/cities/<string:city_id>', methods=['PUT'])
 def update_city(city_id):
     """Updates an existing city of given Id"""
@@ -77,4 +82,3 @@ def update_city(city_id):
         return valid_id.to_dict(), 200
     else:
         abort(400, description="Not a JSON")
-
