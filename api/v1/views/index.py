@@ -13,11 +13,13 @@ from models.user import User
 classes = {"amenities": Amenity, "cities": City, "places": Place,
            "reviews": Review, "states": State, "users": User}
 
+
 @app_views.route('/status')
 def state():
     """Json status"""
     message = {"status": "OK"}
     return jsonify(message)
+
 
 @app_views.route('/stats')
 def numb_objects():
