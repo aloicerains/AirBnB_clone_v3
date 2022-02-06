@@ -14,7 +14,7 @@ def get_amenities():
     list_amenities = []
     for amenity in amenities:
         list_amenities.append(amenity.to_dict())
-    return (jsonify(list_amenities))
+    return (jsonify(list_amenities)), 200
 
 
 @app_views.route('/amenities/<string:am_id>/', methods=['GET'])
@@ -24,10 +24,9 @@ def get_amenity(am_id):
     valid_id = storage.get(Amenity, am_id)
     if valid_id is None:
         abort(404)
-    return (jsonify(valid_id.to_dict()))
+    return (jsonify(valid_id.to_dict())), 200
 
 
-@app_views.route('/amenities/<string:am_id>/', methods=['DELETE'])
 @app_views.route('/amenities/<string:am_id>', methods=['DELETE'])
 def delete_amenity(am_id):
     """Deletes an amenity for a given Id"""
@@ -55,7 +54,6 @@ def create_amenity():
         abort(400, description="Not a JSON")
 
 
-@app_views.route('/amenities/<string:am_id>/', methods=['PUT'])
 @app_views.route('/amenities/<string:am_id>', methods=['PUT'])
 def update_amenity(am_id):
     """Updates the amenity based on Id"""
