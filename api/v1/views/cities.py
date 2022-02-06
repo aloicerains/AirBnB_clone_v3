@@ -10,7 +10,7 @@ from models.state import State
 
 @app_views.route('/states/<string:state_id>/cities/', methods=['GET'])
 @app_views.route('/states/<string:state_id>/cities', methods=['GET'])
-def get_cities(state_id, strict_slashes=False):
+def get_cities(state_id):
     """Retrieves Cities of state"""
     valid_id = storage.get(State, state_id)
     if valid_id is None:
