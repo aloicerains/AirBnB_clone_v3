@@ -26,7 +26,7 @@ def get_cities(state_id):
 
 
 @app_views.route('/cities/<string:city_id>', methods=['GET'])
-def get_city(city_id):
+def get_city(city_id, strict_slashes=False):
     """Retrieves specific city of given Id"""
     valid_id = storage.get(City, city_id)
     if valid_id is None:
@@ -35,7 +35,7 @@ def get_city(city_id):
 
 
 @app_views.route('/cities/<string:city_id>', methods=['DELETE'])
-def delete_city(city_id):
+def delete_city(city_id, strict_slashes=False):
     """Deletes a city object of given Id"""
     valid_id = storage.get(City, city_id)
     if valid_id is None:
@@ -67,7 +67,7 @@ def create_city(state_id):
 
 
 @app_views.route('/cities/<string:city_id>', methods=['PUT'])
-def update_city(city_id):
+def update_city(city_id, strict_slashes=False):
     """Updates an existing city of given Id"""
     valid_id = storage.get(City, city_id)
     if valid_id is None:
