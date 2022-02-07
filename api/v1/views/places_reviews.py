@@ -79,7 +79,7 @@ def update_review(r_id):
         storage.delete(valid_id)
         ignore = ["id", "user_id", "place_id", "created_at", "updated_at"]
         for key, value in req.items():
-            if key not in ignore:
+            if req[key] not in ignore:
                 setattr(valid_id, key, value)
         storage.new(valid_id)
         storage.save()
