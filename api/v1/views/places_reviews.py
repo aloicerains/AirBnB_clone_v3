@@ -2,6 +2,7 @@
 """Review Module"""
 from models import storage
 from models.review import Review
+from models.user import User
 from models.place import Place
 from api.v1.views import app_views
 from flask import jsonify, abort, request
@@ -16,7 +17,7 @@ def get_reviews(p_id):
     if valid_id.reviews is None:
         abort(404)
     list_review = []
-    for review in valid_id.reviews.values():
+    for review in valid_id.reviews:
         list_review.append(review.to_dict())
     return jsonify(list_review)
 
