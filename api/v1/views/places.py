@@ -8,16 +8,17 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
-@app_views.route('/cities/<string:c_id>/places', methods=['GET'])
 @app_views.route('/cities/<string:c_id>/places/', methods=['GET'])
+@app_views.route('/cities/<string:c_id>/places', methods=['GET'])
 def get_places(c_id):
     """Retrieves a list of all Place objects of a city"""
-    valid_id = storage.all(City, c_id)
+    valid_id = storage.get(City, c_id)
     if valid_id is None:
         abort(404)
     if valid_id.places is None:
         abort(404)
-    for place in valid_id.places.values():
+    place_list = []
+    for place in valid_id.places:
         place_list.append(place.to_dict())
     return jsonify(place_list), 200
 
@@ -42,6 +43,7 @@ def delete_place(p_id):
     return {}, 200
 
 
+@app_views.route('/cities/<string:c_id>/places/', methods=['POST'])
 @app_views.route('/cities/<string:c_id>/places', methods=['POST'])
 def create_place(c_id):
     """Creates a place"""
@@ -62,7 +64,7 @@ def create_place(c_id):
         new_place = Place(**req)
         storage.new(new_place)
         storage.save()
-        return jsonify(new_plce.to_dict()), 201
+        return jsonify(new_place.to_dict()), 201
     else:
         abort(400, description="Not a JSON")
 
