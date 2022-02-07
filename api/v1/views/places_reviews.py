@@ -46,7 +46,7 @@ def delete_review(r_id):
 @app_views.route('/places/<string:p_id>/reviews', methods=['POST'])
 def create_review(p_id):
     """Creates a new review"""
-    if request.is_json is not None:
+    if request.is_json:
         req = request.get_json()
         valid_id = storage.get(Place, p_id)
         if valid_id is None:
@@ -79,7 +79,7 @@ def update_review(r_id):
         storage.delete(valid_id)
         ignore = ["id", "user_id", "place_id", "created_at", "updated_at"]
         for key, value in req.items():
-            if req[key] not in ignore:
+            if key not in ignore:
                 setattr(valid_id, key, value)
         storage.new(valid_id)
         storage.save()
