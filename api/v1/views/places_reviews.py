@@ -7,6 +7,7 @@ from models.place import Place
 from api.v1.views import app_views
 from flask import jsonify, abort, request
 
+
 @app_views.route('/places/<string:p_id>/reviews', methods=['GET'])
 def get_reviews(p_id):
     """Retrieves all Reviews"""
@@ -39,6 +40,7 @@ def delete_review(r_id):
     storage.delete(valid_id)
     storage.save()
     return {}, 200
+
 
 @app_views.route('/places/<string:p_id>/reviews/', methods=['POST'])
 @app_views.route('/places/<string:p_id>/reviews', methods=['POST'])
