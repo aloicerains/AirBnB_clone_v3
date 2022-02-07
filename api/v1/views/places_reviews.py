@@ -28,7 +28,7 @@ def get_review(r_id):
     valid_id = storage.get(Review, r_id)
     if valid_id is None:
         abort(404)
-    return jsonify(valid_id.to_dict()), 200
+    return jsonify(valid_id.to_dict())
 
 
 @app_views.route('/reviews/<string:r_id>', methods=['DELETE'])
@@ -42,7 +42,6 @@ def delete_review(r_id):
     return {}, 200
 
 
-@app_views.route('/places/<string:p_id>/reviews/', methods=['POST'])
 @app_views.route('/places/<string:p_id>/reviews', methods=['POST'])
 def create_review(p_id):
     """Creates a new review"""
