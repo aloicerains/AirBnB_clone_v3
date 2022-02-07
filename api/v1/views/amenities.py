@@ -60,7 +60,7 @@ def update_amenity(am_id):
     valid_id = storage.get(Amenity, am_id)
     if valid_id is None:
         abort(404)
-    if request.is_json is not None:
+    if request.is_json:
         req = request.get_json()
         ignore = ["id", "created_at", "updated_at"]
         storage.delete(valid_id)
