@@ -61,7 +61,7 @@ def update_user(u_id):
     valid_id = storage.get(User, u_id)
     if valid_id is None:
         abort(404)
-    if request.is_json is not None:
+    if request.is_json:
         req = request.get_json()
         ignore = ["id", "email", "created_at", "updated_at"]
         storage.delete(valid_id)
