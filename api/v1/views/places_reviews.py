@@ -8,6 +8,7 @@ from api.v1.views import app_views
 from flask import jsonify, abort, request
 
 
+@app_views.route('/places/<string:p_id>/reviews/', methods=['GET'])
 @app_views.route('/places/<string:p_id>/reviews', methods=['GET'])
 def get_reviews(p_id):
     """Retrieves all Reviews"""
@@ -71,7 +72,7 @@ def create_review(p_id):
 @app_views.route('/reviews/<string:r_id>', methods=['PUT'])
 def update_review(r_id):
     """Updates review"""
-    if request.is_json is not None:
+    if request.is_json:
         req = request.get_json()
         valid_id = storage.get(Review, r_id)
         if valid_id is None:
