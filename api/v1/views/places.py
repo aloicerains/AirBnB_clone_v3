@@ -47,7 +47,7 @@ def delete_place(p_id):
 @app_views.route('/cities/<string:c_id>/places', methods=['POST'])
 def create_place(c_id):
     """Creates a place"""
-    if request.is_json is not None:
+    if request.is_json:
         valid_id = storage.get(City, c_id)
         if valid_id is None:
             abort(404)

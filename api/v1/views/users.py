@@ -41,7 +41,7 @@ def delete_user(u_id):
 @app_views.route('/users', methods=['POST'])
 def create_user():
     """Creates new user"""
-    if request.is_json is not None:
+    if request.is_json:
         req = request.get_json()
         if req.get('email') is None:
             abort(400, description="Missing email")
