@@ -19,7 +19,7 @@ def get_reviews(p_id):
     list_review = []
     for review in valid_id.reviews:
         list_review.append(review.to_dict())
-    return jsonify(list_review)
+    return jsonify(list_review), 200
 
 
 @app_views.route('/reviews/<string:r_id>', methods=['GET'])
@@ -28,7 +28,7 @@ def get_review(r_id):
     valid_id = storage.get(Review, r_id)
     if valid_id is None:
         abort(404)
-    return jsonify(valid_id.to_dict())
+    return jsonify(valid_id.to_dict()), 200
 
 
 @app_views.route('/reviews/<string:r_id>', methods=['DELETE'])
